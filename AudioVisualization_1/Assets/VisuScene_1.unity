@@ -149,10 +149,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8ef56a12ca355844a632acd3d4995c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sampleCubePrefab: {fileID: 0}
-  maxScale8Bands: 0
-  cubeScale: 5
-  useBuffer: 0
+  sampleCubePrefab: {fileID: -927199367670048503, guid: 942cd07459b22bb499e4524a0bec782b,
+    type: 3}
+  maxScale8Bands: 20
+  cubeScale: 10
+  useBuffer: 1
 --- !u!4 &285282119
 Transform:
   m_ObjectHideFlags: 0
@@ -165,7 +166,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &966025972
 GameObject:
@@ -305,7 +306,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &989927075
 GameObject:
@@ -336,8 +337,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5836ca3859b5fc846be8c7fca4a4b587, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sampleCubePrefab: {fileID: 0}
-  maxscale: 0
+  sampleCubePrefab: {fileID: -927199367670048503, guid: 942cd07459b22bb499e4524a0bec782b,
+    type: 3}
+  maxscale: 1000
 --- !u!4 &989927077
 Transform:
   m_ObjectHideFlags: 0
@@ -350,7 +352,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1291762235
 GameObject:
