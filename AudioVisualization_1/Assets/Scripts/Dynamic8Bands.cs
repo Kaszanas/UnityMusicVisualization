@@ -17,30 +17,7 @@ public class Dynamic8Bands : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        for (int i = 0; i < 8; i++)
-        {
-
-            // Creating Instance of a specified cube
-            GameObject instanceSampleCube = (GameObject)Instantiate(sampleCubePrefab);
-            instanceSampleCube.transform.position = this.transform.position;
-            instanceSampleCube.transform.parent = this.transform;
-
-            // Setting the name for instanced cubes
-            instanceSampleCube.name = "SampleCube8BandCube" + i;
-
-            // Transforming every instanced cube
-
-            // Creating as much cubes as it is the range of this loop
-            cubePrefab[i] = instanceSampleCube;
-            cubePrefab[i].transform.localScale = new Vector3(cubeScale, cubeScale, cubeScale);
-            cubePrefab[i].transform.position = new Vector3(cubeScale + i, 0, 0);
-
-            cubePrefab[i].GetComponent<MeshRenderer>().material = myMaterial;
-
-
-        }
-
-        
+        InstantiateCubesAssignMaterial();
     }
 
     // Update is called once per frame
@@ -66,4 +43,33 @@ public class Dynamic8Bands : MonoBehaviour
             }
         }
     }
+
+    void InstantiateCubesAssignMaterial()
+    {
+
+        for (int i = 0; i < 8; i++)
+        {
+
+            // Creating Instance of a specified cube
+            GameObject instanceSampleCube = (GameObject)Instantiate(sampleCubePrefab);
+            instanceSampleCube.transform.position = this.transform.position;
+            instanceSampleCube.transform.parent = this.transform;
+
+            // Setting the name for instanced cubes
+            instanceSampleCube.name = "SampleCube8BandCube" + i;
+
+            // Transforming every instanced cube
+
+            // Creating as much cubes as it is the range of this loop
+            cubePrefab[i] = instanceSampleCube;
+            cubePrefab[i].transform.localScale = new Vector3(cubeScale, cubeScale, cubeScale);
+            cubePrefab[i].transform.position = new Vector3(cubeScale + i, 0, 0);
+
+            cubePrefab[i].GetComponent<MeshRenderer>().material = myMaterial;
+
+
+        }
+
+    }
+
 }
