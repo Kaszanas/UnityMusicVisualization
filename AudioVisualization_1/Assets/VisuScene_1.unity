@@ -154,7 +154,7 @@ MonoBehaviour:
   maxScale8Bands: 1000
   cubeScale: 5
   useBuffer: 1
-  myMaterial: {fileID: 0}
+  myMaterial: {fileID: 2100000, guid: 805cd5e74d895de4f937d27e24f8d32c, type: 2}
 --- !u!4 &285282119
 Transform:
   m_ObjectHideFlags: 0

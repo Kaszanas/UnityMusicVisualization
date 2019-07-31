@@ -35,6 +35,7 @@ public class Dynamic8Bands : MonoBehaviour
             cubePrefab[i].transform.localScale = new Vector3(cubeScale, cubeScale, cubeScale);
             cubePrefab[i].transform.position = new Vector3(cubeScale + i, 0, 0);
 
+            cubePrefab[i].GetComponent<MeshRenderer>().material = myMaterial;
 
 
         }
