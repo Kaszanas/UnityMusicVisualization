@@ -151,9 +151,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sampleCubePrefab: {fileID: -927199367670048503, guid: 942cd07459b22bb499e4524a0bec782b,
     type: 3}
-  maxScale8Bands: 20
-  cubeScale: 10
+  maxScale8Bands: 1000
+  cubeScale: 5
   useBuffer: 1
+  myMaterial: {fileID: 0}
 --- !u!4 &285282119
 Transform:
   m_ObjectHideFlags: 0

@@ -12,6 +12,8 @@ public class Dynamic8Bands : MonoBehaviour
     public float cubeScale = 5f;
     public bool useBuffer;
 
+    public Material myMaterial;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -50,6 +52,8 @@ public class Dynamic8Bands : MonoBehaviour
                 if (useBuffer)
                 {   
                     cubePrefab[i].transform.localScale = new Vector3(cubeScale, cubeScale + AudioPeer.audioBandBuffer[i] * maxScale8Bands, cubeScale);
+                    float emissionStrength = AudioPeer.audioBandBuffer[i];
+                    cubePrefab[i].GetComponent<MeshRenderer>().material.SetFloat("_MyEmission", emissionStrength);
                 }
 
                 if (!useBuffer)
