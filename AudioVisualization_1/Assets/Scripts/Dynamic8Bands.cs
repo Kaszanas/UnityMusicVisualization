@@ -33,7 +33,11 @@ public class Dynamic8Bands : MonoBehaviour
             cubePrefab[i].transform.localScale = new Vector3(cubeScale, cubeScale, cubeScale);
             cubePrefab[i].transform.position = new Vector3(cubeScale + i, 0, 0);
 
+
+
         }
+
+        
     }
 
     // Update is called once per frame
@@ -44,8 +48,11 @@ public class Dynamic8Bands : MonoBehaviour
             if (cubePrefab != null)
             {
                 if (useBuffer)
-                {
+                {   
                     cubePrefab[i].transform.localScale = new Vector3(cubeScale, cubeScale + AudioPeer.audioBandBuffer[i] * maxScale8Bands, cubeScale);
+                    Color color = new Color(AudioPeer.audioBandBuffer[i], AudioPeer.audioBandBuffer[i], AudioPeer.audioBandBuffer[i]);
+                    cubePrefab[i].GetComponent<MeshRenderer>().materials[0].SetColor("_MyEmission", color);
+
                 }
 
                 if (!useBuffer)

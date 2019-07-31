@@ -22,7 +22,7 @@ public class AudioPeer : MonoBehaviour
     {
         thisAudio = GetComponent<AudioSource> ();
         GetSpectrumAudioSource();
-        FrequencyBands();
+        MakeFrequencyBands();
         CreateAudioBands();
         BandBuffer();
     }
@@ -31,9 +31,10 @@ public class AudioPeer : MonoBehaviour
     void Update()
     {
         GetSpectrumAudioSource();
-        FrequencyBands();
-        CreateAudioBands();
+        MakeFrequencyBands();
         BandBuffer();
+        CreateAudioBands();
+
         
     }
 
@@ -44,7 +45,30 @@ public class AudioPeer : MonoBehaviour
     }
 
 
-    void FrequencyBands()
+    void BandBuffer()
+    {
+        for (int g = 0; g < 8; g++)
+        {
+
+            if (freqBand[g] > buffer[g])
+            {
+                buffer[g] = freqBand[g];
+                bufferDecrease[g] = 0.005f;
+            }
+
+
+            if (freqBand[g] < buffer[g])
+            {
+                buffer[g] -= bufferDecrease[g];
+                bufferDecrease[g] *= 1.2f;
+            }
+
+        }
+
+    }
+
+
+    void MakeFrequencyBands()
     {
         int count = 0;
 
@@ -76,6 +100,7 @@ public class AudioPeer : MonoBehaviour
 
     }
 
+
     void CreateAudioBands()
     {
         for (int i = 0; i < 8; i++)
@@ -84,33 +109,13 @@ public class AudioPeer : MonoBehaviour
             {
                 freqBandHighest[i] = freqBand[i];
             }
-            audioBand[i] = (freqBand[i] / freqBandHighest[i]);
-            audioBandBuffer[i] = (buffer[i] / freqBandHighest[i]);
+            audioBand[i] = freqBandHighest[i] == 0 ? 0 : freqBand[i] / freqBandHighest[i];
+            audioBandBuffer[i] = freqBandHighest[i] == 0 ? 0 : buffer[i] / freqBandHighest[i];
         }
 
     }
 
-    void BandBuffer()
-    {
-        for (int g = 0; g < 8; g++)
-        {
 
-            if (freqBand[g] > buffer[g])
-            {
-                buffer[g] = freqBand[g];
-                bufferDecrease[g] = 0.005f;
-            }
-
-
-            if (freqBand[g] < buffer[g])
-            {
-                buffer[g] -= bufferDecrease[g];
-                bufferDecrease[g] *= 1.2f;
-            }
-
-        }
-
-    }
 
 
 
