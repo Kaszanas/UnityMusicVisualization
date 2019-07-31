@@ -50,9 +50,6 @@ public class Dynamic8Bands : MonoBehaviour
                 if (useBuffer)
                 {   
                     cubePrefab[i].transform.localScale = new Vector3(cubeScale, cubeScale + AudioPeer.audioBandBuffer[i] * maxScale8Bands, cubeScale);
-                    Color color = new Color(AudioPeer.audioBandBuffer[i], AudioPeer.audioBandBuffer[i], AudioPeer.audioBandBuffer[i]);
-                    cubePrefab[i].GetComponent<MeshRenderer>().materials[0].SetColor("_MyEmission", color);
-
                 }
 
                 if (!useBuffer)
