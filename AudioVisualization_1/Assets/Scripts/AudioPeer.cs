@@ -14,6 +14,10 @@ public class AudioPeer : MonoBehaviour
     float[] bufferDecrease = new float[8];
 
     float[] freqBandHighest = new float[8];
+
+    // TODO This is causing problems in CreateBands as of now!
+    // The length of the array is too small for the 512 bands.
+    // Buffer is also created within a loop which len is not enough to hold buffer for every band created in a 512 array
     public static float[] audioBand = new float[8];
     public static float[] audioBandBuffer = new float[8];
 

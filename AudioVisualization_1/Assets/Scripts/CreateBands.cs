@@ -27,6 +27,9 @@ public class CreateBands : MonoBehaviour
     GameObject[] geo512 = new GameObject[512];
     GameObject[] geo8 = new GameObject[8];
 
+    // Created scenarios
+    // selectScenario == 0 - Create circle of 512 objects
+    // selectScenario == 1 - Create line of 8 objects
 
     void Start()
     {
@@ -41,33 +44,38 @@ public class CreateBands : MonoBehaviour
 
     void InstantiateCubesAssignMaterial(int selectScenario)
     {
-        
-        // Created scenarios
-        // 0 - Create circle of 512 objects
-        // 1 - Create line of 8 objects
 
+
+        
         if (selectScenario == 0)
         {
 
+            // Setting the loop variable to clearly see the number of iterations
+            int loopVariable = 512;
+
             // Creating GameObject for creating 512 bands
             GameObject[] geo = geo512;
-            
-            // Creating Instance of a specified cube
-            GameObject instanceSampleCube = (GameObject)Instantiate(insertGeo);
 
-            // Setting the name for instanced cubes
-            instanceSampleCube.name = "8_BandCube" + i;
+            for (int i = 0; i < loopVariable; i++)
+            {
+                
+                // Creating Instance of a specified cube
+                GameObject instanceSampleCube = (GameObject)Instantiate(insertGeo);
 
-            // Create 512 cubes in a circle
-            instanceSampleCube.transform.position = this.transform.position;
-            instanceSampleCube.transform.parent = this.transform;
-            this.transform.eulerAngles = new Vector3(0, -0.73125f * i, 0);
-            instanceSampleCube.transform.position = Vector3.forward * 100;
+                // Setting the name for instanced cubes
+                instanceSampleCube.name = "8_BandCube" + i;
+
+                // Create 512 cubes in a circle
+                instanceSampleCube.transform.position = this.transform.position;
+                instanceSampleCube.transform.parent = this.transform;
+                this.transform.eulerAngles = new Vector3(0, -0.73125f * i, 0);
+                instanceSampleCube.transform.position = Vector3.forward * 100;
 
 
 
-            geo[i] = instanceSampleCube;
-            geo[i].GetComponent<MeshRenderer>().material = myMaterial;
+                geo[i] = instanceSampleCube;
+                geo[i].GetComponent<MeshRenderer>().material = myMaterial;
+            }
 
         }
 
@@ -76,9 +84,10 @@ public class CreateBands : MonoBehaviour
             // Creating GameObject for creating 8 bands
             GameObject[] geo = geo8;
 
-            // Create 8 cubes in a line
+            // Setting the loop variable to clearly see the number of iterations
+            int loopVariable = 8;
 
-            for (int i = 0; i < 8; i++)
+            for (int i = 0; i < loopVariable; i++)
             {
 
                 // Creating Instance of a specified cube
