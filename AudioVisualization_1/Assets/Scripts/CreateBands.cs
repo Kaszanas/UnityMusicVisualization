@@ -108,14 +108,14 @@ public class CreateBands : MonoBehaviour
                 {
                     if (useBuffer)
                     {
-                        geo[i].transform.localScale = new Vector3(geoScale, geoScale + AudioPeer.audioBandBuffer[i] * maxScale8Bands, geoScale);
+                        geo[i].transform.localScale = new Vector3(geoScale, geoScale + AudioPeer.audioBandBuffer[i] * maxScaleBands, geoScale);
                         float emissionStrength = AudioPeer.audioBandBuffer[i];
                         geo[i].GetComponent<MeshRenderer>().material.SetFloat("_MyEmission", emissionStrength);
                     }
 
                     if (!useBuffer)
                     {
-                        geo[i].transform.localScale = new Vector3(geoScale, geoScale + AudioPeer.audioBand[i] * maxScale8Bands, geoScale);
+                        geo[i].transform.localScale = new Vector3(geoScale, geoScale + AudioPeer.audioBand[i] * maxScaleBands, geoScale);
                         float emissionStrength = AudioPeer.audioBand[i];
                         geo[i].GetComponent<MeshRenderer>().material.SetFloat("_MyEmission", emissionStrength);
                     }
