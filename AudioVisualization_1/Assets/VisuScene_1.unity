@@ -146,15 +146,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 285282117}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8ef56a12ca355844a632acd3d4995c1, type: 3}
+  m_Script: {fileID: 11500000, guid: 2a1e5d1d4d4d3f34580d2c543c7c2a07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sampleCubePrefab: {fileID: -927199367670048503, guid: 942cd07459b22bb499e4524a0bec782b,
+  insertGeo: {fileID: -927199367670048503, guid: 942cd07459b22bb499e4524a0bec782b,
     type: 3}
-  maxScale8Bands: 1000
-  cubeScale: 5
+  maxScaleBands: 15
+  selectScenario: 1
+  myMaterial: {fileID: 2100000, guid: 799bd93448970ff4baad776c162b845a, type: 2}
   useBuffer: 1
-  myMaterial: {fileID: 2100000, guid: 805cd5e74d895de4f937d27e24f8d32c, type: 2}
 --- !u!4 &285282119
 Transform:
   m_ObjectHideFlags: 0

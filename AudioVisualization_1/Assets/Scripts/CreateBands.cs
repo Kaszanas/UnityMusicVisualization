@@ -6,7 +6,7 @@ public class CreateBands : MonoBehaviour
 {
 
     // Inserting the geometry that You wish to be created as a music visualizer
-    public static GameObject insertGeo;
+    public GameObject insertGeo;
 
     // Defining the scale of the geometry created with a default of 5
     public static float geoScale = 5f;
@@ -18,7 +18,7 @@ public class CreateBands : MonoBehaviour
     public int selectScenario;
 
     // Specifying the material that will be assigned to the created geometry
-    public static Material myMaterial;
+    public Material myMaterial;
 
     // Using bool for switching whether buffer should be used or not
     public bool useBuffer;
