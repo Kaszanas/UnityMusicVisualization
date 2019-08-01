@@ -19,7 +19,7 @@ public class Dynamic8Bands : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InstantiateCubesAssignMaterial();
+        InstantiateCubesAssignMaterial(selectScenario);
     }
 
     // Update is called once per frame
