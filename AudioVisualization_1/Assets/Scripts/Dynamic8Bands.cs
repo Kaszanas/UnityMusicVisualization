@@ -9,12 +9,13 @@ public class Dynamic8Bands : MonoBehaviour
     public GameObject sampleCubePrefab;
     GameObject[] cubePrefab = new GameObject[8];
     public float maxScale8Bands;
-    public float cubeScale = 5f;
-    public bool useBuffer;
 
     public int selectScenario;
 
     public Material myMaterial;
+
+    public float cubeScale = 5f;
+    public bool useBuffer;
 
     // Start is called before the first frame update
     void Start()

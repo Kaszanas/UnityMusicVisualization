@@ -11,6 +11,9 @@ public class CreateBands : MonoBehaviour
     // Defining the scale of the geometry created with a default of 5
     public static float geoScale = 5f;
 
+    // Maximum scale that will be reached reacting to signal
+    public float maxScaleBands;
+
     // Public scenario selecting value to be used within a function
     public int selectScenario;
 
@@ -27,20 +30,18 @@ public class CreateBands : MonoBehaviour
 
     void Start()
     {
-        
+        InstantiateCubesAssignMaterial(selectScenario);
+        UsingBuffer(selectScenario);
     }
 
     void Update()
     {
-        
+        UsingBuffer(selectScenario);
     }
 
     void InstantiateCubesAssignMaterial(int selectScenario)
     {
-
-
         
-
         // Created scenarios
         // 0 - Create circle of 512 objects
         // 1 - Create line of 8 objects
@@ -96,8 +97,9 @@ public class CreateBands : MonoBehaviour
 
         if (selectScenario == 0)
         {
-
+            // Setting the loop variable to clearly see the number of iterations
             int loopVariable = 512;
+
             GameObject[] geo = geo512;
 
             for (int i = 0; i < loopVariable; i++)
@@ -114,6 +116,8 @@ public class CreateBands : MonoBehaviour
                     if (!useBuffer)
                     {
                         geo[i].transform.localScale = new Vector3(geoScale, geoScale + AudioPeer.audioBand[i] * maxScale8Bands, geoScale);
+                        float emissionStrength = AudioPeer.audioBand[i];
+                        geo[i].GetComponent<MeshRenderer>().material.SetFloat("_MyEmission", emissionStrength);
                     }
 
 
@@ -126,21 +130,38 @@ public class CreateBands : MonoBehaviour
 
         if (selectScenario == 1)
         {
+            
+            // Setting the loop variable to clearly see the number of iterations
+            int loopVariable = 8;
+
             GameObject[] geo = geo8;
+
+            for (int i = 0; i < loopVariable; i++)
+            {
+                if (geo != null)
+                {
+                    if (useBuffer)
+                    {
+                        geo[i].transform.localScale = new Vector3(geoScale, geoScale + AudioPeer.audioBandBuffer[i] * maxScaleBands, geoScale);
+                        float emissionStrength = AudioPeer.audioBandBuffer[i];
+                        geo[i].GetComponent<MeshRenderer>().material.SetFloat("_MyEmission", emissionStrength);
+                    }
+
+                    if (!useBuffer)
+                    {
+                        geo[i].transform.localScale = new Vector3(geoScale, geoScale + AudioPeer.audioBand[i] * maxScaleBands, geoScale);
+                        float emissionStrength = AudioPeer.audioBand[i];
+                        geo[i].GetComponent<MeshRenderer>().material.SetFloat("_MyEmission", emissionStrength);
+                    }
+
+
+                }
+            }
+            
         }
-
-
-
-
-
-
-
-
-
+        
 
     }
 
-
-
-
+    
 }
