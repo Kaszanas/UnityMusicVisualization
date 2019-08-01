@@ -51,8 +51,24 @@ public class CreateBands : MonoBehaviour
 
             // Creating GameObject for creating 512 bands
             GameObject[] geo = geo512;
+            
+            // Creating Instance of a specified cube
+            GameObject instanceSampleCube = (GameObject)Instantiate(insertGeo);
+
+            // Setting the name for instanced cubes
+            instanceSampleCube.name = "8_BandCube" + i;
 
             // Create 512 cubes in a circle
+            instanceSampleCube.transform.position = this.transform.position;
+            instanceSampleCube.transform.parent = this.transform;
+            this.transform.eulerAngles = new Vector3(0, -0.73125f * i, 0);
+            instanceSampleCube.transform.position = Vector3.forward * 100;
+
+
+
+            geo[i] = instanceSampleCube;
+            geo[i].GetComponent<MeshRenderer>().material = myMaterial;
+
         }
 
         if (selectScenario == 1)
@@ -69,7 +85,7 @@ public class CreateBands : MonoBehaviour
                 GameObject instanceSampleCube = (GameObject)Instantiate(insertGeo);
                 
                 // Setting the name for instanced cubes
-                instanceSampleCube.name = "SampleCube8BandCube" + i;
+                instanceSampleCube.name = "8_BandCube" + i;
 
                 instanceSampleCube.transform.position = this.transform.position;
                 instanceSampleCube.transform.parent = this.transform;
