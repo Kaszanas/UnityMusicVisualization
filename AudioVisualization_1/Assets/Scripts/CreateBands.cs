@@ -8,11 +8,6 @@ public class CreateBands : MonoBehaviour
     // Inserting the geometry that You wish to be created as a music visualizer
     public static GameObject insertGeo;
 
-
-    
-
-
-
     // Defining the scale of the geometry created with a default of 5
     public static float geoScale = 5f;
 
@@ -21,6 +16,14 @@ public class CreateBands : MonoBehaviour
 
     // Specifying the material that will be assigned to the created geometry
     public static Material myMaterial;
+
+    // Using bool for switching whether buffer should be used or not
+    public bool useBuffer;
+
+    // Creating 2 GameObjects to be used depending on conditions
+    GameObject[] geo512 = new GameObject[512];
+    GameObject[] geo8 = new GameObject[8];
+
 
     void Start()
     {
@@ -32,7 +35,7 @@ public class CreateBands : MonoBehaviour
         
     }
 
-    public static void InstantiateCubesAssignMaterial(int selectScenario)
+    void InstantiateCubesAssignMaterial(int selectScenario)
     {
 
 
@@ -46,7 +49,7 @@ public class CreateBands : MonoBehaviour
         {
 
             // Creating GameObject for creating 512 bands
-            GameObject[] geo = new GameObject[512];
+            GameObject[] geo = geo512;
 
             // Create 512 cubes in a circle
         }
@@ -54,7 +57,7 @@ public class CreateBands : MonoBehaviour
         if (selectScenario == 1)
         {
             // Creating GameObject for creating 8 bands
-            GameObject[] geo = new GameObject[8];
+            GameObject[] geo = geo8;
 
             // Create 8 cubes in a line
 
@@ -63,21 +66,19 @@ public class CreateBands : MonoBehaviour
 
                 // Creating Instance of a specified cube
                 GameObject instanceSampleCube = (GameObject)Instantiate(insertGeo);
-
-
+                
                 // Setting the name for instanced cubes
                 instanceSampleCube.name = "SampleCube8BandCube" + i;
 
                 instanceSampleCube.transform.position = this.transform.position;
                 instanceSampleCube.transform.parent = this.transform;
-
-
-
-                // Transforming every instanced cube
-
+                
                 // Creating as much cubes as it is the range of this loop
                 geo[i] = instanceSampleCube;
+                
+                // Transforming every instanced cube
                 geo[i].transform.localScale = new Vector3(geoScale, geoScale, geoScale);
+
                 geo[i].transform.position = new Vector3(geoScale + i, 0, 0);
 
                 geo[i].GetComponent<MeshRenderer>().material = myMaterial;
@@ -89,6 +90,57 @@ public class CreateBands : MonoBehaviour
 
 
     }
+
+    void UsingBuffer(int selectScenario)
+    {
+
+        if (selectScenario == 0)
+        {
+
+            int loopVariable = 512;
+            GameObject[] geo = geo512;
+
+            for (int i = 0; i < loopVariable; i++)
+            {
+                if (geo != null)
+                {
+                    if (useBuffer)
+                    {
+                        geo[i].transform.localScale = new Vector3(geoScale, geoScale + AudioPeer.audioBandBuffer[i] * maxScale8Bands, geoScale);
+                        float emissionStrength = AudioPeer.audioBandBuffer[i];
+                        geo[i].GetComponent<MeshRenderer>().material.SetFloat("_MyEmission", emissionStrength);
+                    }
+
+                    if (!useBuffer)
+                    {
+                        geo[i].transform.localScale = new Vector3(geoScale, geoScale + AudioPeer.audioBand[i] * maxScale8Bands, geoScale);
+                    }
+
+
+                }
+            }
+
+
+
+        }
+
+        if (selectScenario == 1)
+        {
+            GameObject[] geo = geo8;
+        }
+
+
+
+
+
+
+
+
+
+
+    }
+
+
 
 
 }
