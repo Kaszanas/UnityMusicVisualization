@@ -7,12 +7,17 @@ public class AudioPeer : MonoBehaviour
 {
 
     AudioSource thisAudio;
-    float[] samples = new float[512];
+    public static float[] samples = new float[512];
+    public static float[] samples8 = new float[8];
     float[] freqBand = new float[8];
     float[] buffer = new float[8];
     float[] bufferDecrease = new float[8];
 
     float[] freqBandHighest = new float[8];
+
+    // TODO This is causing problems in CreateBands as of now!
+    // The length of the array is too small for the 512 bands.
+    // Buffer is also created within a loop which len is not enough to hold buffer for every band created in a 512 array
     public static float[] audioBand = new float[8];
     public static float[] audioBandBuffer = new float[8];
 
@@ -20,34 +25,27 @@ public class AudioPeer : MonoBehaviour
     void Start()
     {
         thisAudio = GetComponent<AudioSource> ();
+        GetSpectrumAudioSource();
+        MakeFrequencyBands();
+        CreateAudioBands();
+        BandBuffer();
     }
 
     // Update is called once per frame
     void Update()
     {
         GetSpectrumAudioSource();
-        FrequencyBands();
+        MakeFrequencyBands();
         BandBuffer();
         CreateAudioBands();
+
+        
     }
+
 
     void GetSpectrumAudioSource()
     {
         thisAudio.GetSpectrumData(samples, 0, FFTWindow.Blackman);
-    }
-
-    void CreateAudioBands()
-    {
-        for (int i = 0; i < 8; i++)
-        {
-            if (freqBand[i] > freqBandHighest[i])
-            {
-                freqBandHighest[i] = freqBand[i];
-            }
-            audioBand [i] = (freqBand [i] / freqBandHighest [i]);
-            audioBandBuffer[i] = (buffer [i] / freqBandHighest [i]);
-        }
-
     }
 
 
@@ -56,7 +54,7 @@ public class AudioPeer : MonoBehaviour
         for (int g = 0; g < 8; g++)
         {
 
-            if (freqBand [g] > buffer [g])
+            if (freqBand[g] > buffer[g])
             {
                 buffer[g] = freqBand[g];
                 bufferDecrease[g] = 0.005f;
@@ -65,7 +63,7 @@ public class AudioPeer : MonoBehaviour
 
             if (freqBand[g] < buffer[g])
             {
-                buffer[g] -= bufferDecrease [g];
+                buffer[g] -= bufferDecrease[g];
                 bufferDecrease[g] *= 1.2f;
             }
 
@@ -73,7 +71,8 @@ public class AudioPeer : MonoBehaviour
 
     }
 
-    void FrequencyBands()
+
+    void MakeFrequencyBands()
     {
         int count = 0;
 
@@ -82,7 +81,7 @@ public class AudioPeer : MonoBehaviour
 
             float average = 0;
             int samplecount = (int)Mathf.Pow(2, i) * 2;
-            
+
             if (i == 7)
             {
                 samplecount += 2;
@@ -96,7 +95,7 @@ public class AudioPeer : MonoBehaviour
 
             average /= count;
 
-            freqband[i] = average * 10;
+            freqBand[i] = average * 10;
 
 
         }
@@ -104,6 +103,34 @@ public class AudioPeer : MonoBehaviour
 
 
     }
+
+
+    void CreateAudioBands()
+    {
+        for (int i = 0; i < 8; i++)
+        {
+            if (freqBand[i] > freqBandHighest[i])
+            {
+                freqBandHighest[i] = freqBand[i];
+            }
+            audioBand[i] = freqBandHighest[i] == 0 ? 0 : freqBand[i] / freqBandHighest[i];
+            audioBandBuffer[i] = freqBandHighest[i] == 0 ? 0 : buffer[i] / freqBandHighest[i];
+        }
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }
